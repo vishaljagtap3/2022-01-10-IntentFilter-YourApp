@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.StrictMode
+import android.util.Log
 import com.bitcode.yourapplication.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -85,6 +86,31 @@ class MainActivity : AppCompatActivity() {
                 Uri.parse(binding.edtPath.text.toString())
             )
             startActivity(intent)
+        }
+
+        binding.img.setOnClickListener {
+            var intent = Intent(Intent.ACTION_PICK)
+            intent.setType("image/*")
+            startActivityForResult(
+                intent,
+                1
+            )
+
+        }
+
+        binding.btnSendBroadcast.setOnClickListener {
+            var intent = Intent("in.bitcode.download.COMPLETE")
+            intent.putExtra("path", binding.edtPath.text.toString())
+            //sendBroadcast(intent)
+            sendStickyBroadcast(intent)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(data != null && data.data != null) {
+            Log.e("tag", "${data.data.toString()}")
+            binding.img.setImageURI(data.data)
         }
     }
 }

@@ -55,4 +55,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <Button
+        android:text="Send Broadcast"
+        android:id="@+id/btnSendBroadcast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="200dp"
+        android:layout_height="200dp"/>
+
 </LinearLayout>
